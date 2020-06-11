@@ -24,8 +24,11 @@ export default {
     }
   },
   methods: {
+    getCanvas() {
+      return document.getElementById('wheel__canvas');
+    },
     getWidth() {
-      const canvas = document.getElementById('wheel__canvas');
+      const canvas = this.getCanvas();
       return canvas.width;
     },
     getCenter() {
@@ -35,7 +38,7 @@ export default {
       return deg * Math.PI/180;
     },
     getCtx() {
-      const canvas = document.getElementById('wheel__canvas');
+      const canvas = this.getCanvas();
       return canvas.getContext('2d');
     },
     rand(min, max) {
@@ -70,8 +73,6 @@ export default {
       ctx.clearRect(0, 0, width, width);
       for(var i=0; i<this.slices; i++){
         this.drawSlice(this.deg, this.colors[i]);
-        console.log('draw img');
-        console.log(this.values);
         this.drawText(this.deg+this.sliceDeg/2, this.values[i]);
         this.deg += this.sliceDeg;
       }
@@ -94,18 +95,28 @@ export default {
       }
       // Stopped!
       if(this.lock && !this.speed){
+        console.log('i stop');
         var ai = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg); // deg 2 Array Index
         ai = (this.slices+ai)%this.slices; // Fix negative index
         return alert("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
       }
+      else {
+        console.log('no stop because');
+        console.log(this.speed);
+        console.log(this.lock);
+      }
 
       this.drawImg();
       window.requestAnimationFrame( this.anim );
+    },
+    stopWheel() {
+      this.isStopped = true;
     }
   },
   mounted() {
     this.deg = this.rand(0, 360);
     this.anim();
+    setTimeout(this.stopWheel, 1000);
   }
 }
 </script>
