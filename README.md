@@ -1,5 +1,7 @@
 # wheeldecide
 
+A small wheel of fortune I built thanks to Vue and some cool snippets found online. 
+
 ## Project setup
 ```
 yarn install
@@ -20,5 +22,6 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Some amazing links
+[Getting started with <canvas>](https://www.kirupa.com/html5/drawing_triangles_on_the_canvas.htm).
+[Introduction à Canvas](https://www.alsacreations.com/tuto/lire/1484-introduction.html)
