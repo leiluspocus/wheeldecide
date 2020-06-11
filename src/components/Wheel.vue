@@ -1,5 +1,6 @@
 <template>
   <div id="wheel">
+    <canvas id="wheel__triangle" width="50" height="50"></canvas>
     <canvas id="wheel__canvas" width="500" height="500"></canvas>
   </div>
 </template>
@@ -40,6 +41,25 @@ export default {
     getCtx() {
       const canvas = this.getCanvas();
       return canvas.getContext('2d');
+    },
+    drawTriangle() {
+      console.log('ttot');
+      const context = document.getElementById('wheel__triangle').getContext('2d');
+      // the triangle
+      context.beginPath();
+      context.moveTo(30, 30);
+      context.lineTo(20, 50);
+      context.lineTo(40, 50);
+      context.closePath();
+
+      // the outline
+      context.lineWidth = 1;
+      context.strokeStyle = '#666666';
+      context.stroke();
+
+      // the fill color
+      context.fillStyle = "#FFCC00";
+      context.fill(); 
     },
     rand(min, max) {
       return Math.random() * (max - min) + min;
@@ -95,15 +115,9 @@ export default {
       }
       // Stopped!
       if(this.lock && !this.speed){
-        console.log('i stop');
         var ai = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg); // deg 2 Array Index
         ai = (this.slices+ai)%this.slices; // Fix negative index
-        return alert("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
-      }
-      else {
-        console.log('no stop because');
-        console.log(this.speed);
-        console.log(this.lock);
+        return console.log("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
       }
 
       this.drawImg();
@@ -116,27 +130,16 @@ export default {
   mounted() {
     this.deg = this.rand(0, 360);
     this.anim();
-    setTimeout(this.stopWheel, 1000);
+    this.drawTriangle();
+    setTimeout(this.stopWheel, 2000);
   }
 }
 </script>
 
 <style scoped>
-#wheel__canvas {
-  display:inline-block;
-  position:relative;
-  overflow:hidden;
-}
-#wheel__canvas:after{
-  content:"";
-  background:red;
-  border:2px solid white;
-  position:absolute;
-  top:-7px;
-  left:50%;
-  width:10px;
-  height:10px;
-  margin-left:-7px;
-  transform: rotate(45deg)
-}
+#wheel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
 </style>
