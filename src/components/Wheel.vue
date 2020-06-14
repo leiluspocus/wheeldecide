@@ -10,7 +10,6 @@ export default {
   name: 'Wheel',
   props: {
       values: Array,
-      spinTo: String
   },
   data() {
     return {
@@ -97,6 +96,21 @@ export default {
         this.deg += this.sliceDeg;
       }
     },
+    drawResultTriangle(choice) {
+      const result = document.createElement('canvas');
+      const ctx = result.getContext('2d');
+      ctx.beginPath();
+      ctx.rect(20, 20, 150, 100);
+      ctx.stroke();
+      ctx.font = '48px serif';
+      ctx.fillText(choice, 10, 50);
+      //ctx.fillStyle = "#fff";
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "center";
+      //ctx.fill(); 
+      console.log(result);
+      this.getCtx().drawImage(`${result} has been chosen`, 150, 150);
+    },
     anim() {
       this.deg += this.speed;
       this.deg %= 360;
@@ -117,6 +131,7 @@ export default {
       if(this.lock && !this.speed){
         var ai = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg); // deg 2 Array Index
         ai = (this.slices+ai)%this.slices; // Fix negative index
+        this.drawResultTriangle(this.values[ai]);
         return console.log("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
       }
 
@@ -131,7 +146,7 @@ export default {
     this.deg = this.rand(0, 360);
     this.anim();
     this.drawTriangle();
-    setTimeout(this.stopWheel, 2000);
+    setTimeout(this.stopWheel, 500);
   }
 }
 </script>
