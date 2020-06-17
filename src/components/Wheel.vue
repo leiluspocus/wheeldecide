@@ -1,5 +1,6 @@
 <template>
   <div id="wheel">
+    <span id="wheel__choice">{{ this.result }} </span>
     <canvas id="wheel__triangle" width="50" height="50"></canvas>
     <canvas id="wheel__canvas" width="500" height="500"></canvas>
   </div>
@@ -21,6 +22,7 @@ export default {
       slowDownRand: 0,
       lock: false,
       isStopped: false,
+      result:'',
       colors: ['#fbc','#f88','#f67','#f88','#fbc','#f88', "#fbc", "#f67"]
     }
   },
@@ -47,9 +49,9 @@ export default {
       const context = document.getElementById('wheel__triangle').getContext('2d');
       // the triangle
       context.beginPath();
-      context.moveTo(30, 30);
-      context.lineTo(20, 50);
-      context.lineTo(40, 50);
+      context.moveTo(0, 0);
+      context.lineTo(25, 50);
+      context.lineTo(50, 0);
       context.closePath();
 
       // the outline
@@ -117,6 +119,7 @@ export default {
       if(this.lock && !this.speed){
         var ai = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg); // deg 2 Array Index
         ai = (this.slices+ai)%this.slices; // Fix negative index
+        this.result = this.values[ai];
         return console.log("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
       }
 

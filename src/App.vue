@@ -6,7 +6,7 @@
     </div>
     <button v-show="!isSpinning" @click="choices++">Add one more</button>
     <button v-show="!isSpinning" @click="spin">Spin that wheel !</button>
-    <button v-show="isSpinning" @click="spin">Do it again !</button>
+    <button v-show="isSpinning" @click="revert">Do it again !</button>
   </div>
 </template>
 
@@ -30,6 +30,9 @@ export default {
     spin() {
       this.isSpinning = true;
       this.result = this.values[Math.floor(Math.random() * this.values.length)];
+    },
+    revert() {
+      this.isSpinning = false;
     },
     selectResult(msg) {
       console.log(msg);
