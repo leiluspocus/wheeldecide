@@ -1,6 +1,5 @@
 <template>
   <div id="wheel">
-    <span id="wheel__choice">{{ this.result }} </span>
     <canvas id="wheel__triangle" width="50" height="50"></canvas>
     <canvas id="wheel__canvas" width="500" height="500"></canvas>
   </div>
@@ -21,8 +20,7 @@ export default {
       slowDownRand: 0,
       lock: false,
       isStopped: false,
-      result:'',
-      colors: ['#fbc','#f88','#f67','#f88','#fbc','#f88', "#fbc", "#f67"]
+      colors: ['#E0E2DB','#D2D4C8','#B8BDB5','#889696','#5F7470','#E0E2DB', "#D2D4C8", "#B8BDB5"]
     }
   },
   methods: {
@@ -55,11 +53,11 @@ export default {
 
       // the outline
       context.lineWidth = 1;
-      context.strokeStyle = '#666666';
+      context.strokeStyle = '#F3FCF0';
       context.stroke();
 
       // the fill color
-      context.fillStyle = "#FFCC00";
+      context.fillStyle = "#FFD23F";
       context.fill(); 
     },
     rand(min, max) {
@@ -98,21 +96,6 @@ export default {
         this.deg += this.sliceDeg;
       }
     },
-    drawResultTriangle(choice) {
-      const result = document.createElement('canvas');
-      const ctx = result.getContext('2d');
-      ctx.beginPath();
-      ctx.rect(20, 20, 150, 100);
-      ctx.stroke();
-      ctx.font = '48px serif';
-      ctx.fillText(choice, 10, 50);
-      //ctx.fillStyle = "#fff";
-      ctx.textBaseline = "middle";
-      ctx.textAlign = "center";
-      //ctx.fill(); 
-      console.log(result);
-      this.getCtx().drawImage(`${result} has been chosen`, 150, 150);
-    },
     anim() {
       this.deg += this.speed;
       this.deg %= 360;
@@ -133,8 +116,6 @@ export default {
       if(this.lock && !this.speed){
         var ai = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg); // deg 2 Array Index
         ai = (this.slices+ai)%this.slices; // Fix negative index
-        this.result = this.values[ai];
-        this.drawResultTriangle(this.values[ai]);
         return console.log("You got:\n"+ this.values[ai] ); // Get Array Item from end Degree
       }
 
@@ -160,4 +141,9 @@ export default {
   flex-direction: column;
   align-items: center;
 } 
+
+#wheel__triangle {
+    position: absolute;
+    top: 45px;
+}
 </style>
