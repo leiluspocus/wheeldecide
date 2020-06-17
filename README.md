@@ -1,8 +1,16 @@
 # wheeldecide
 
-A small wheel of fortune I built thanks to Vue and some cool snippets found online. 
+A small wheel of fortune I built with Vue.js and some cool canvas snippets I found online. 
 
-## Project setup
+This app is accessible here: http://wheeldecide.netlify.app 
+
+## Tutorials I followed
+[Getting started with <canvas>](https://www.kirupa.com/html5/drawing_triangles_on_the_canvas.htm).
+
+[Introduction à Canvas](https://www.alsacreations.com/tuto/lire/1484-introduction.html)
+
+
+### Project setup
 ```
 yarn install
 ```
@@ -21,7 +29,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Some amazing links
-[Getting started with <canvas>](https://www.kirupa.com/html5/drawing_triangles_on_the_canvas.htm).
-[Introduction à Canvas](https://www.alsacreations.com/tuto/lire/1484-introduction.html)
