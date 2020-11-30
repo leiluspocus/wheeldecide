@@ -7,6 +7,7 @@
     <button v-show="!isSpinning" @click="choices++">Add one more</button>
     <button v-show="!isSpinning" @click="spin">Spin that wheel !</button>
     <button v-show="isSpinning" @click="spin">Do it again !</button>
+    <span>By <a href="http://leiluspocus.netlify.app">Laïla</a></span>
   </div>
 </template>
 
